@@ -7,6 +7,11 @@
         }
     ],
     "require": {
-        "pecee/simple-router": "4.2.0.6"
+        "pecee/simple-router": "4.2.0.6",
+        "rmccue/requests": "^1.7",
+        "sunra/php-simple-html-dom-parser": "^1.5",
+        "paquettg/php-html-parser": "^2.1",
+        "guzzlehttp/guzzle": "^6.5",
+        "ivopetkov/html5-dom-document-php": "2.*"
     }
 }

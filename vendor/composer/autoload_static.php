@@ -8,7 +8,12 @@ class ComposerStaticInit2610604cf6ba77fe8d3625eab59f8c0f
 {
     public static $files = array (
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'b33e3d135e5d9e47d845c576147bda89' => __DIR__ . '/..' . '/php-di/php-di/src/functions.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '16eed290c5592c18dc3f16802ad3d0e4' => __DIR__ . '/..' . '/ivopetkov/html5-dom-document-php/autoload.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -20,14 +25,22 @@ class ComposerStaticInit2610604cf6ba77fe8d3625eab59f8c0f
         ),
         'P' => 
         array (
+            'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'PhpParser\\' => 10,
             'PhpDocReader\\' => 13,
             'Pecee\\' => 6,
+            'PHPHtmlParser\\' => 14,
         ),
         'I' => 
         array (
             'Invoker\\' => 8,
+        ),
+        'G' => 
+        array (
+            'GuzzleHttp\\Psr7\\' => 16,
+            'GuzzleHttp\\Promise\\' => 19,
+            'GuzzleHttp\\' => 11,
         ),
         'D' => 
         array (
@@ -48,6 +61,10 @@ class ComposerStaticInit2610604cf6ba77fe8d3625eab59f8c0f
         array (
             0 => __DIR__ . '/..' . '/jeremeamia/superclosure/src',
         ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
@@ -64,13 +81,53 @@ class ComposerStaticInit2610604cf6ba77fe8d3625eab59f8c0f
         array (
             0 => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee',
         ),
+        'PHPHtmlParser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/paquettg/php-html-parser/src/PHPHtmlParser',
+        ),
         'Invoker\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-di/invoker/src',
         ),
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'GuzzleHttp\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
+        ),
+        'GuzzleHttp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
         'DI\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-di/php-di/src',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        's' => 
+        array (
+            'stringEncode' => 
+            array (
+                0 => __DIR__ . '/..' . '/paquettg/string-encode/src',
+            ),
+        ),
+        'S' => 
+        array (
+            'Sunra\\PhpSimple\\HtmlDomParser' => 
+            array (
+                0 => __DIR__ . '/..' . '/sunra/php-simple-html-dom-parser/Src',
+            ),
+        ),
+        'R' => 
+        array (
+            'Requests' => 
+            array (
+                0 => __DIR__ . '/..' . '/rmccue/requests/library',
+            ),
         ),
     );
 
@@ -79,6 +136,7 @@ class ComposerStaticInit2610604cf6ba77fe8d3625eab59f8c0f
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit2610604cf6ba77fe8d3625eab59f8c0f::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit2610604cf6ba77fe8d3625eab59f8c0f::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit2610604cf6ba77fe8d3625eab59f8c0f::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
