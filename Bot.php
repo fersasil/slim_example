@@ -21,7 +21,7 @@ class Bot {
   private $island_id;
 
   function __construct ($email, $password, $server_number, $proxy = "" ){
-      $this->client = new \GuzzleHttp\Client(['cookies' => true, 'proxy' => $proxy]);
+      $this->client = new \GuzzleHttp\Client(['cookies' => true, 'proxy' => $proxy, 'verify' => false]);
 
       $this->headers = array();
       $this->headers[] = 'Authority: lobby.ikariam.gameforge.com';
@@ -34,16 +34,14 @@ class Bot {
       $this->headers[] = 'Referer: https://lobby.ikariam.gameforge.com/pt_BR/';
       $this->headers[] = 'Accept-Encoding: gzip, deflate, br';
       $this->headers[] = 'Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7';
-      $this->headers[] = 'Cookie: pc_idt=AJgBxM6f-RNtY0DD02exhCvW7eFulOk3ul4R32dkET0rlQ6z3pvyxuc982CX40ZjDi8JZE6LIb5uaS7vRlK4Sn4c1Bcxj74-2IGGpQEZUpYzwXZdSRUA_s9p9RwX8FewOvDQsif5EqHdsQT32DhHfUA006nZvJ6P4RDj6w; never_logged_in=false';
 
       $this->email = $email;
       $this->password = $password;
       $this->server_number = $server_number;
       $this->country = "br";
 
-
-      $this->login();
       $this->setBaseUrl();
+      $this->login();
   }
 
   function login(){
@@ -61,23 +59,25 @@ class Bot {
         "headers" => $this->headers,
         "form_params" => $data
     ]);
+
     
     
     $response = $this->client->request('GET', 'https://lobby.ikariam.gameforge.com/api/users/me/accounts');
     
     $response_array = json_decode($response->getBody()->getContents());
     $url = "";
-
+    
     foreach ($response_array as $key => $ikaria_account) {
       if($ikaria_account->server->number == $this->server_number){
         $url = "https://lobby.ikariam.gameforge.com/api/users/me/loginLink?id=$ikaria_account->id&server[language]=br&server[number]=$this->server_number&clickedButton=account_l";
-        break;
-      }
+      break;
     }
-    
+  }
+  
     $response = $this->client->request('GET', $url);
-    
+  
     $json_response  = $response->getBody()->getContents();
+  
     
     $login_url = json_decode($json_response)->url;
     
@@ -384,27 +384,3 @@ class Bot {
     $this->rewardShown(); 
   }
 }
-
-$bot = new Bot("guilhermefsds@gmail.com", "3864", "4");
-
-
-echo "Quartel\n";
-$bot->build_barrack();
-echo "Madereira\n";
-$bot->assign_saw_mill_workers();
-echo "Academia\n";
-$bot->build_academy();
-echo "Armazem\n";
-$bot->build_wareahouse();
-echo "Muralha\n";
-$bot->build_wall();
-echo "Portp\n";
-$bot->build_port();
-echo "Pausa 120s\n";
-sleep(120);
-echo "Comprar barco\n";
-$bot->build_boat();
-echo "update armazem\n";
-$bot->upgrade_wareahouse();
-echo "Atacar barbaros\n";
-$bot->attack_barbarians_and_plus();

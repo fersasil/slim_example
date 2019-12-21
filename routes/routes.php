@@ -1,17 +1,21 @@
 <?php
-require __DIR__ . "/../" . "controllers/" . "teste.php";
-require __DIR__ . "/../" . "controllers/" . "exemplo2.php";
-
-
 use Pecee\SimpleRouter\SimpleRouter as Router;
-use gui\oi\oi as oi;
 
-//Exemplo 3
-$controller = require __DIR__ . "/../" . "controllers/" . "exemplo3.php";
 
-Router::get('/', $controller->teste);
 
-// Example of a group
-Router::group(['prefix' => '/api'], function () {
-    Router::resource('/', 'ApiController');
+// Dev route
+// $route = '/ika_bot/api';
+
+// Prod route
+$route = "/api";
+
+Router::group(['prefix' => $route], function () {
+    $controller = require join_paths(path, "controllers","BotController.php");
+
+    Router::post('/tutorial_pt1', $controller->tutorial_pt1);
+    Router::post('/tutorial_pt2', $controller->tutorial_pt2);
+
+    Router::get("/", function(){
+        echo "Ola mundo";
+    });
 });
