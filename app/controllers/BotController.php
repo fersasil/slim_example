@@ -3,8 +3,6 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-require_once join_paths(path, "helpers", "Bot.php");
-
 
 $controller = new stdClass;
 
@@ -18,15 +16,20 @@ $controller->oi = function ($request, $response, array $args) {
 $controller->tutorial_pt1 = function (Request $request, Response $response): Response{
     // Retrieve the JSON data
     $parameters = (array) $request->getParsedBody();
-
-    $response->getBody()->write('Create user');
-
-    return $response;
-
+    
     $email = $parameters['email'];
     $password = $parameters['password'];
     $server_number = $parameters['server_number'];
     $proxy = $parameters['proxy'];
+
+    if($email == NULL || $password == NULL || $server_number == NULL || $proxy == NULL){
+        $response->withStatus(400)
+            ->getBody()
+            ->write("Input faltando");
+        return $response;
+    }
+    // BAD REQUEST 400
+    // ou 418 tea coffe
 
     try {
         $bot = new Bot($email, $password, $server_number);
@@ -38,36 +41,47 @@ $controller->tutorial_pt1 = function (Request $request, Response $response): Res
         $bot->build_wall();
         $bot->build_port();
 
-        
+        $response->getBody()->write(json_encode($parameters));
+        return $response;        
     } catch (\Throwable $th) {
-        
+        $response->withStatus(500)
+            ->getBody()
+            ->write("Algum erro deve ter ocorrido");
+        return $response;
     }
 
-    return $response;
 };
 
-$controller->tutorial_pt2 = function (){
-    // $email = input('email', null, 'post');
-    // $password = input('password', null, 'post');
-    // $server_number = input('server_number', null, 'post');
-    // $proxy = input('proxy', null, 'post');
+$controller->tutorial_pt2 = function (Request $request, Response $response): Response{
+    // Retrieve the JSON data
+    $parameters = (array) $request->getParsedBody();
+    
+    $email = $parameters['email'];
+    $password = $parameters['password'];
+    $server_number = $parameters['server_number'];
+    $proxy = $parameters['proxy'];
+
+    if($email == NULL || $password == NULL || $server_number == NULL || $proxy == NULL){
+        $response->withStatus(400)
+            ->getBody()
+            ->write("Input faltando");
+        return $response;
+    }
 
     try {
-        // $bot = new Bot($email, $password, $server_number);
-        // $bot->build_boat();
-        // $bot->upgrade_wareahouse();
-        // $bot->attack_barbarians_and_plus();
+        $bot = new Bot($email, $password, $server_number);
+        $bot->build_boat();
+        $bot->upgrade_wareahouse();
+        $bot->attack_barbarians_and_plus();
 
-        // return response()->json([
-        //     'ok' => "Tutorial was made",
-        //     'code'  => "TEST",
-        // ]);
+        $response->getBody()->write(json_encode($parameters));
+        return $response;
+
     } catch (\Throwable $th) {
-        // return response()->json([
-        //     'ok' => "ERROR",
-        //     'code'  => "TEST",
-        //     'error' => $th
-        // ]);
+        $response->withStatus(500)
+            ->getBody()
+            ->write("Algum erro deve ter ocorrido");
+        return $response;
     }
 };
 
