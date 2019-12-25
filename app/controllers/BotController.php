@@ -1,9 +1,17 @@
 <?php
-require_once join_paths(path, "Bot.php");
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+
+require_once join_paths(path, "helpers", "Bot.php");
 
 
 $controller = new stdClass;
 
+$controller->oi = function (Request $request, Response $response, array $args) {
+    $name = $args['name'];
+    $response->getBody()->write("Hello, $name");
+    return $response;
+};
 
 $controller->tutorial_pt1 = function (){
     $email = input('email', null, 'post');
