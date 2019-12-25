@@ -1,7 +1,7 @@
 <?php
 
 // Marque como DEV e preencha os dados de development
-// Marque PROD e preencha os dados de produção
+// Marque PROD e preencha os dados de produção  
 $option = "DEV"; 
 
 // nome da pasta no qual o projeto esta
