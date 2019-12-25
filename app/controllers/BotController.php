@@ -19,9 +19,9 @@ $controller->tutorial_pt1 = function (Request $request, Response $response): Res
     // Retrieve the JSON data
     $parameters = (array) $request->getParsedBody();
 
-    // $response->getBody()->write('Create user');
+    $response->getBody()->write('Create user');
 
-    // return $response;
+    return $response;
 
     $email = $parameters['email'];
     $password = $parameters['password'];
