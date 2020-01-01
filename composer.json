@@ -1,9 +1,14 @@
 {
+    "name": "Slim example project",
+    "description": "A shor example of how use slim php",
     "require": {
         "slim/slim": " ^4.1",
         "slim/psr7": " ^0.5"
     },
     "scripts": {
         "start": "php -S localhost:8080 -t ./"
+    },
+    "config": {
+        "process-timeout": 0
     }
 }
