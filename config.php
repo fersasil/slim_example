@@ -14,17 +14,21 @@ $dir_name = "";
 // Ex 2: "https://example.com"
 $allow_origin_url = "*";
 
+//
+$db_servername = "localhost";
+
 //Database name
 $db_name = "mydb";
 
 //Database user
-$db_user = "root";
+$db_user = "gui";
 
 //Database user password
 $db_password = "";
 
 /*aqui são as urls de produção*/
 $dir_name_prod = "ika";
+$db_servername_prod = "";
 $allow_origin_url_prod = "";
 $db_name_prod = "";
 $db_user_prod = "";
@@ -36,6 +40,7 @@ if($option = "DEV"){
     define("DATABASE_NAME", $db_name);
     define("DATABASE_USER", $db_user);
     define("DATABASE_USER_PASSWORD", $db_password);
+    define("DATABASE_SERVERNAME", $db_servername);
 }
 else{
     define("DIRECTORY_NAME", $dir_name_prod);
@@ -43,4 +48,5 @@ else{
     define("DATABASE_NAME", $db_name_prod);
     define("DATABASE_USER", $db_user_prod);
     define("DATABASE_USER_PASSWORD", $db_password_prod);
+    define("DATABASE_SERVERNAME", $db_servername_prod);
 }

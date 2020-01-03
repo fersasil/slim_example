@@ -24,7 +24,8 @@ $add_routes($app);
 $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function ($request, $response) {
     echo "Pagina não encontrada";
     // TODO Melhorar a resposta!
-    return;
+    $response->withStatus(404);
+    return $response;
 });
 
 
