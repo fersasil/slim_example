@@ -2,7 +2,9 @@
 
 namespace database\newDb {
 
-  class Conn{
+use stdClass;
+
+class Conn{
     private $conn;
 
     public function __construct(){
@@ -43,14 +45,32 @@ namespace database\newDb {
       }
 
       $statement->execute();
-
+      
       $res = $statement->get_result();
+      
+      if($statement->affected_rows == -1) {
+        $result = new stdClass;
+        $result->success = false; //Error
+        if($statement->error){
+          $result->error = $statement->error;
+          $result->errno = $statement->errno;
+        }
+
+        return $result;
+      }
+
+      if($statement->affected_rows == 0 && $statement->num_rows == 0) {
+        return [];
+      }
+      
+
 
       if ($res === false) {
         $id = mysqli_insert_id($this->conn);
         $statement->close();
-        return ["insertion_id" => $id];
+        return [(object)["insertion_id" => $id]];
       }
+
 
       // $row = $res->fetch_assoc();
       $result = [];

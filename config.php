@@ -34,6 +34,11 @@ $db_name_prod = "";
 $db_user_prod = "";
 $db_password_prod = "";
 
+
+define("SECRET_JWT", 'Hello&MikeFooBar123');
+define("DEFAULT_EXPIRATION_JWT", 3600); 
+define("DEFAULT_ISSUER_JWT", "localhost");
+
 if($option = "DEV"){
     define("DIRECTORY_NAME", $dir_name);
     define("ALLOW_ORIGIN", $allow_origin_url);
